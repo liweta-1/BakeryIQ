@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crust Issues Bakery — Информационно-аналитическая система</title>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=OHGVdyIwAHm6nwFyzacfu7STCpP7XZQ24M62zMHMoDWjMQJdcOHNG-hzBCT_32uGGm2WOU6Dlxw78TDHvh9RH4g1QDmxAanbQSRdVGVG2FmE7TFtbaELBHvpgDRslIeIggSA2jE5hECb7XEth8dUUIhbGvfbKEpIN5d0oBV-PyTW9449MNZC6GvThQ95TRQQauj7NuEzM780CesvnHCLh4qP43HlVPyix8SzCO5a4_7QLmUjKGoTkk2LHNiqIdynSylk3hR8UkPf_dhapMnzvHkTQAh6Ub3WHZrhWOEBh-DZgt97OU-CurlzMe2oJcr3q-wsC6JykSCrVXjYXp319XbP7NPDSUIrofmPy_4j54_y427HP3DjbK323eMZfwcfRl2jCA5couzeHlEqHPv61FuSkEc-_-Y7wilaJl1qQ12IkMeTeUbxqZGXM-FgOvgPgKpULr4_eK1bIDoITkAs9DjbDoYChQCfCk_Tg8CPDPIlHCq1t0Os8akWq6QwjPK7GfOlQ2oIkZQ76B5YOuTbj80NbncqVtQ_Oe9eA8kDPVHjX1TZUvsXvX4SmzN2uoAWvpg0dc9fwPiI-boOxn8NbvL2m45MJ9rXLKIKYQn0uHTJi_vcOHmAvyC8FU7skdw4OoYpWkqQDOmUrhOVIO7OC3jffSyDzOGLq7t9Uo4rqysKXRQr4jgrYOa95G3O4I2D4Wgkknk6YKFeeKzIs6kTMnCUDNDeI_8DQqUytVYphRjmrpjkhRoG72GgBSJraoZjbBfNkGd1HjkCgRZQ3yLeWUpcXHiUNhD0d9gV1LJaN6eQNs92l--cWmfULNPUnOz2Zr-MJJRtyVrSR81_8ih7lDUCXlzAbrvNCwrucmVQu-ANiqorsfNhiq3kC0XjXNGnbEpOChhMkfCXeylaaoN80A" charset="UTF-8"></script><style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+:root{--caramel:#D4A574;--choc:#8B5A3C;--dark:#3E2723;--cream:#FFF8F0;--linen:#FAF0E6;--terra:#C97B5A;--wheat:#E8C89A;--ok:#6B8E5A;--warn:#E0A458;--err:#C0392B;--info:#5B8FA8}
+body{background:var(--cream);color:var(--dark);min-height:100vh}
+button{cursor:pointer;border:none;font-family:inherit}
+
+.login{min-height:100vh;background:linear-gradient(135deg,#FFF8F0,#F5E6D3,#E8D4B8);padding:30px 20px}
+.login-head{text-align:center;margin-bottom:24px}
+.logo{width:90px;height:90px;margin:0 auto 10px}
+.brand{font-size:26px;font-weight:700;color:var(--dark)}
+.sub{font-size:13px;color:var(--choc);margin-top:4px;opacity:.8}
+.wrap{max-width:1200px;margin:0 auto}
+.group{background:white;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 20px rgba(62,39,35,.08)}
+.group-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.group-title::before{content:'';width:4px;height:18px;background:var(--caramel);border-radius:2px}
+.badge{background:var(--caramel);color:var(--dark);font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{background:var(--cream);border:1.5px solid rgba(212,165,116,.2);border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center;transition:all .2s;cursor:pointer}
+.card:hover{border-color:var(--caramel);background:white;transform:translateY(-2px);box-shadow:0 4px 20px rgba(62,39,35,.08)}
+.av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--caramel),var(--terra));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;flex-shrink:0}
+.info{flex:1;min-width:0}
+.nm{font-size:13px;font-weight:700;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rl{font-size:11px;color:var(--choc);opacity:.85}
+.ps{font-size:10px;color:var(--choc);margin-top:3px;font-family:monospace;background:var(--linen);padding:1px 6px;border-radius:4px;display:inline-block}
+.go{background:var(--dark);color:white;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;flex-shrink:0}
+
+.app{display:none;min-height:100vh}
+.app.on{display:flex}
+.side{width:280px;background:linear-gradient(180deg,var(--dark),#2A1A14);color:white;padding:24px 0;position:fixed;height:100vh;overflow-y:auto;z-index:100}
+.side-head{padding:0 24px 24px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:12px}
+.side-logo{width:44px;height:44px;flex-shrink:0}
+.side-brand{font-size:16px;font-weight:700;line-height:1.2}
+.side-brand small{display:block;font-size:11px;opacity:.6;font-weight:400;margin-top:2px}
+.ucard{margin:20px 16px;padding:14px;background:rgba(255,255,255,.06);border-radius:14px;border:1px solid rgba(255,255,255,.08)}
+.uav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--caramel),var(--terra));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:white;margin-bottom:10px}
+.uname{font-size:14px;font-weight:600;margin-bottom:2px}
+.urole{font-size:11px;opacity:.7}
+.ulevel{display:inline-block;background:var(--caramel);color:var(--dark);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:6px}
+.nav{padding:8px 12px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:rgba(255,255,255,.75);font-size:14px;cursor:pointer;margin-bottom:2px}
+.nav-item:hover{background:rgba(255,255,255,.08);color:white}
+.nav-item.on{background:linear-gradient(135deg,var(--caramel),var(--terra));color:white;font-weight:600}
+.logout{margin:16px;padding:11px;background:rgba(192,57,43,.15);color:#FFB4A9;border-radius:10px;font-size:13px;font-weight:600;width:calc(100% - 32px);display:flex;align-items:center;justify-content:center;gap:8px}
+.logout:hover{background:rgba(192,57,43,.25)}
+
+.main{flex:1;margin-left:280px;padding:32px;min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--dark),var(--choc));border-radius:20px;padding:32px;color:white;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:radial-gradient(circle,rgba(212,165,116,.25),transparent 70%);border-radius:50%}
+.hero-content{display:flex;gap:24px;align-items:center;flex-wrap:wrap;position:relative;z-index:1}
+.hero-av{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--caramel),var(--terra));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:36px;border:4px solid rgba(255,255,255,.2);flex-shrink:0}
+.hero-info{flex:1;min-width:200px}
+.hero-name{font-size:26px;font-weight:700;margin-bottom:6px}
+.hero-pos{font-size:15px;opacity:.85;margin-bottom:10px}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap}
+.meta-item{background:rgba(255,255,255,.12);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px;position:relative;z-index:1}
+.hstat{background:rgba(255,255,255,.1);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.1)}
+.hstat-label{font-size:11px;opacity:.7;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.hstat-val{font-size:20px;font-weight:700}
+
+.block{background:white;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(62,39,35,.08);border:1px solid rgba(212,165,116,.15);margin-bottom:20px}
+.block-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(212,165,116,.15)}
+.block-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--wheat),var(--caramel));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.block-title{font-size:17px;font-weight:700}
+.block-sub{font-size:12px;color:var(--choc);opacity:.7}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px}
+
+.duty-list{list-style:none}
+.duty-item{display:flex;gap:12px;padding:10px 12px;border-radius:10px;margin-bottom:6px;align-items:flex-start}
+.duty-item:hover{background:var(--cream)}
+.duty-num{width:24px;height:24px;border-radius:50%;background:var(--wheat);color:var(--dark);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.duty-text{font-size:13px;flex:1}
+
+.goal{background:linear-gradient(135deg,#FFF8F0,#FAF0E6);border-left:3px solid var(--caramel);padding:12px 16px;border-radius:0 10px 10px 0;margin-bottom:8px;font-size:13px}
+.goal strong{color:var(--choc);display:block;margin-bottom:2px;font-size:12px;text-transform:uppercase;letter-spacing:.3px}
+
+.right-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(212,165,116,.2);align-items:center}
+.right-item:last-child{border-bottom:none}
+.right-icon{width:20px;height:20px;border-radius:50%;background:var(--ok);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.right-text{font-size:13px}
+
+.task-list{display:flex;flex-direction:column;gap:10px}
+.task{background:var(--cream);border:1px solid rgba(212,165,116,.2);border-radius:12px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.task:hover{border-color:var(--caramel);background:white}
+.task-dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.task-dot.pending{background:var(--warn)}
+.task-dot.progress{background:var(--info)}
+.task-dot.done{background:var(--ok)}
+.task-dot.problem{background:var(--err)}
+.task-body{flex:1;min-width:200px}
+.task-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.task-meta{font-size:12px;color:var(--choc);opacity:.8}
+.task-actions{display:flex;gap:6px;flex-wrap:wrap}
+.btn-sm{padding:6px 12px;font-size:12px;border-radius:8px;font-weight:600;background:var(--wheat);color:var(--dark)}
+.btn-sm:hover{background:var(--caramel)}
+.btn-sm.danger{background:#FDECEA;color:var(--err)}
+.btn-sm.success{background:#E8F0E3;color:var(--ok)}
+.tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600}
+.tag.pending{background:#FFF3E0;color:#E0A458}
+.tag.progress{background:#E3F2FD;color:#1976D2}
+.tag.done{background:#E8F0E3;color:var(--ok)}
+.tag.problem{background:#FDECEA;color:var(--err)}
+
+.toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:white;padding:14px 20px;border-radius:12px;box-shadow:0 10px 40px rgba(62,39,35,.12);font-size:14px;z-index:2000;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:900px){
+.side{transform:translateX(-100%);width:260px}
+.side.on{transform:translateX(0)}
+.main{margin-left:0;padding:20px}
+.menu-btn{display:flex!important}
+.hero-av{width:80px;height:80px;font-size:28px}
+.hero-name{font-size:22px}
+}
+.menu-btn{display:none;background:var(--choc);color:white;width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center;margin-bottom:16px}
+</style>
+</head>
+<body>
+
+<div class="login" id="loginPage">
+  <div class="login-head">
+    <svg class="logo" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="95" fill="#FFF8F0" stroke="#D4A574" stroke-width="2"/>
+      <path d="M 40 110 Q 40 70 100 65 Q 160 70 160 110 L 160 130 Q 160 145 145 145 L 55 145 Q 40 145 40 130 Z" fill="#D4A574"/>
+      <path d="M 60 95 Q 100 115 140 95" stroke="#3E2723" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="brand">Crust Issues Bakery</div>
+    <div class="sub">Информационно-аналитическая система</div>
+  </div>
+  <div class="wrap" id="empList"></div>
+</div>
+
+<div class="app" id="app">
+  <aside class="side" id="sidebar">
+    <div class="side-head">
+      <svg class="side-logo" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="95" fill="#FFF8F0" stroke="#D4A574" stroke-width="3"/>
+        <path d="M 40 110 Q 40 70 100 65 Q 160 70 160 110 L 160 130 Q 160 145 145 145 L 55 145 Q 40 145 40 130 Z" fill="#D4A574"/>
+      </svg>
+      <div class="side-brand">Crust Issues<small>Bakery System</small></div>
+    </div>
+    <div class="ucard">
+      <div class="uav" id="uAv">—</div>
+      <div class="uname" id="uName">—</div>
+      <div class="urole" id="uRole">—</div>
+      <div class="ulevel" id="uLevel">Level —</div>
+    </div>
+    <nav class="nav" id="navMenu"></nav>
+    <button class="logout" onclick="logout()">🚪 Выйти из системы</button>
+  </aside>
+
+  <main class="main">
+    <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('on')">☰</button>
+    <div id="pageContent"></div>
+  </main>
+</div>
+
+<script>
+const EMP = [
+  {id:1, name:'Соколов Александр Викторович', pass:'director2026', level:13, role:'Директор сети'},
+  {id:2, name:'Морозова Елена Сергеевна', pass:'regional2026', level:12, role:'Территориальный управляющий'},
+  {id:3, name:'Волков Дмитрий Андреевич', pass:'technolog2026', level:11, role:'Главный технолог'},
+  {id:4, name:'Белова Ольга Николаевна', pass:'buh2026', level:10, role:'Главный бухгалтер'},
+  {id:5, name:'Кузнецов Игорь Павлович', pass:'supplier2026', level:9, role:'Менеджер по поставщикам'},
+  {id:6, name:'Новикова Анна Михайловна', pass:'hr2026', level:8, role:'Администратор персонала'},
+  {id:7, name:'Петров Пётр Сергеевич', pass:'manager2026', level:7, role:'Управляющий пекарней'},
+  {id:8, name:'Фёдорова Мария Ивановна', pass:'prod2026', level:6, role:'Заведующий производством'},
+  {id:9, name:'Смирнов Николай Олегович', pass:'warehouse2026', level:5, role:'Кладовщик'},
+  {id:10, name:'Орлов Сергей Дмитриевич', pass:'baker2026', level:4, role:'Пекарь'},
+  {id:11, name:'Лебедева Светлана Юрьевна', pass:'pastry2026', level:'4k', role:'Кондитер'},
+  {id:12, name:'Козлова Дарья Алексеевна', pass:'cashier2026', level:3, role:'Продавец-кассир'},
+  {id:13, name:'Макаров Артём Владимирович', pass:'kitchen2026', level:2, role:'Кухонный работник'},
+  {id:14, name:'Павлова Татьяна Игоревна', pass:'cleaner2026', level:1, role:'Уборщик'},
+  {id:15, name:'Жуков Виктор Романович', pass:'baker2026', level:4, role:'Пекарь'},
+  {id:16, name:'Григорьева Екатерина Олеговна', pass:'cashier2026', level:3, role:'Продавец-кассир'},
+  {id:17, name:'Тихонов Андрей Михайлович', pass:'kitchen2026', level:2, role:'Кухонный работник'}
+];
+
+const DETAILS = {
+  13:{bakery:'Управление всей сетью',shift:'Гибкий график',
+    goals:[{t:'Стратегическая цель',x:'Обеспечить стабильный рост сети и увеличение прибыли на 15% в год'},{t:'Операционная цель',x:'Поддерживать единые стандарты качества во всех пекарнях'},{t:'Финансовая цель',x:'Контролировать бюджеты и добиваться рентабельности не ниже 18%'}],
+    duties:['Проверить общую статистику сети','Посмотреть отчёты территориальных управляющих','Проверить финансовые показатели','Проверить выполнение планов','Рассмотреть критические проблемы','Утвердить важные решения','Поставить задачи руководителям','Контролировать развитие сети'],
+    rights:['Просмотр всех пекарен','Просмотр всех сотрудников','Создание и редактирование задач','Назначение руководителей','Просмотр всех отчётов','Управление организационной структурой','Утверждение бюджетов','Управление ролями и доступами']},
+  12:{bakery:'Закреплённые пекарни (4 точки)',shift:'09:00 – 18:00',
+    goals:[{t:'Цель по точкам',x:'Обеспечить выполнение плана продаж не менее чем на 95%'},{t:'Цель по персоналу',x:'Поддерживать укомплектованность штата на уровне 98%'},{t:'Цель по качеству',x:'Своевременно выявлять проблемные точки'}],
+    duties:['Проверить работу всех закреплённых пекарен','Проверить отчёты управляющих','Посмотреть показатели продаж','Проверить выполнение планов','Проверить наличие персонала','Контролировать соблюдение стандартов','Выявить проблемные пекарни','Поставить задачи управляющим','Подготовить отчёт директору'],
+    rights:['Просмотр закреплённых пекарен','Просмотр сотрудников','Контроль задач управляющих','Создание задач для управляющих','Просмотр отчётов','Сравнение показателей','Комментирование отчётов']},
+  11:{bakery:'Производственные отделы сети',shift:'08:00 – 17:00',
+    goals:[{t:'Качество',x:'Обеспечить стабильно высокое качество продукции (96%+)'},{t:'Развитие',x:'Разрабатывать новые рецептуры каждый месяц'},{t:'Стандарты',x:'Поддерживать актуальность технологических карт'}],
+    duties:['Проверить качество продукции','Проверить соблюдение рецептур','Контролировать технологические процессы','Проверить отчёты заведующих производством','Обновить технологические инструкции','Разрабатывать новые изделия','Ставить задачи производственным руководителям'],
+    rights:['Просмотр производственных отделов','Создание и редактирование рецептур','Создание технологических карт','Установка стандартов качества','Создание проверок','Просмотр отчётов производства','➕ Добавление новых сотрудников']},
+  10:{bakery:'Финансовый отдел сети',shift:'09:00 – 18:00',
+    goals:[{t:'Точность учёта',x:'Обеспечить 100% точность финансовых отчётов'},{t:'Контроль расходов',x:'Своевременно выявлять нецелевые расходы'},{t:'Отчётность',x:'Готовить финансовую отчётность в срок'}],
+    duties:['Проверить поступления и расходы','Проверить кассовые отчёты','Проверить платежи','Проверить счета поставщиков','Учитывать заработную плату','Проверить задолженности','Подготовить финансовую отчётность'],
+    rights:['Просмотр финансовых данных сети','Создание финансовых отчётов','Управление бухгалтерскими документами','Проверка платежей','Просмотр расходов','Экспорт финансовых отчётов']},
+  9:{bakery:'Отдел закупок',shift:'09:00 – 18:00',
+    goals:[{t:'Бесперебойность',x:'Обеспечить все пекарни ингредиентами без перебоев'},{t:'Экономия',x:'Оптимизировать закупочные цены на 5-7% в квартал'},{t:'Качество сырья',x:'Работать только с проверенными поставщиками'}],
+    duties:['Проверить заявки от пекарен','Проверить остатки сырья','Оформить новые заказы','Связаться с поставщиками','Согласовать цены','Проверить сроки доставки','Отследить текущие поставки','Решить проблемы с задержками'],
+    rights:['Создание заявок на закупку','Просмотр потребностей пекарен','Управление базой поставщиков','Добавление новых поставщиков','Загрузка документов','Просмотр истории заказов','Изменение статусов поставок']},
+  8:{bakery:'Вся сеть',shift:'09:00 – 18:00',
+    goals:[{t:'Дисциплина',x:'Обеспечить 100% выполнение ежедневных задач'},{t:'Прозрачность',x:'Вести точный учёт активности сотрудников'},{t:'Развитие',x:'Своевременно выявлять проблемы в работе персонала'}],
+    duties:['Проверить активность сотрудников','Проверить выполнение заданий','Найти просроченные задачи','Проверить отчёты о сменах','Проверить графики работы','Отправить напоминания','Подготовить отчёт о работе персонала'],
+    rights:['Просмотр всех сотрудников','Просмотр всех задач','Создание шаблонов задач','Контроль выполнения','Создание уведомлений','Просмотр истории активности','Формирование отчётов']},
+  7:{bakery:'Пекарня «Центральная»',shift:'07:30 – 17:00',
+    goals:[{t:'План продаж',x:'Выполнять ежедневный план продаж на 100%'},{t:'Качество обслуживания',x:'Поддерживать высокий уровень сервиса'},{t:'Команда',x:'Обеспечить слаженную работу смены'}],
+    duties:['Проверить открытие пекарни','Проверить присутствие сотрудников','Проверить готовность торгового зала','Проверить производственный план','Проверить продажи','Контролировать качество обслуживания','Проверить остатки товаров','Решить текущие проблемы','Закрыть ежедневный отчёт'],
+    rights:['Просмотр сотрудников своей точки','Назначение задач','Просмотр отчётов','Создание графиков смен','Контроль опозданий','Создание заявок на закупки','Просмотр статистики пекарни']},
+  6:{bakery:'Производственный цех',shift:'06:00 – 15:00',
+    goals:[{t:'Производственный план',x:'Выполнять план производства на 100%'},{t:'Качество',x:'Минимизировать процент брака (не более 2%)'},{t:'Эффективность',x:'Рациональное использование ингредиентов'}],
+    duties:['Проверить готовность цеха','Распределить задачи между пекарями','Установить план производства','Проверить наличие ингредиентов','Контролировать выполнение заказов','Проверить качество продукции','Зафиксировать брак и потери','Составить отчёт о производстве'],
+    rights:['Создание производственных заданий','Назначение задач сотрудникам','Просмотр отчётов','Учёт произведённой продукции','Фиксация брака','Создание заявок на ингредиенты']},
+  5:{bakery:'Склад пекарни',shift:'06:00 – 15:00',
+    goals:[{t:'Учёт',x:'Обеспечить 100% точность складского учёта'},{t:'Свежесть',x:'Не допускать использования просроченных продуктов'},{t:'Запасы',x:'Своевременно сообщать о нехватке сырья'}],
+    duties:['Проверить остатки','Принять поставки','Проверить количество и качество сырья','Занести поступления в систему','Выдать ингредиенты производству','Зафиксировать списания','Проверить сроки годности','Сообщить о нехватке сырья'],
+    rights:['Просмотр складских остатков','Добавление поступлений','Учёт выдачи ингредиентов','Создание складских заявок','Фиксация списаний','Проведение инвентаризации']},
+  4:{bakery:'Производственный цех',shift:'07:00 – 16:00',
+    goals:[{t:'Выполнение плана',x:'Выпекать продукцию строго по плану'},{t:'Качество',x:'Соблюдать рецептуру и технологию на 100%'},{t:'Порядок',x:'Поддерживать чистоту рабочего места'}],
+    duties:['Отметить начало смены','Подготовить рабочее место','Проверить ингредиенты','Подготовить тесто','Сформировать изделия','Провести расстойку','Выпечь продукцию','Проверить качество','Указать количество изготовленной продукции','Убрать рабочее место','Отправить отчёт о смене'],
+    rights:['Просмотр собственных задач','Просмотр рецептур','Просмотр производственного плана','Отметка выполнения задач','Внесение количества продукции','Сообщение о нехватке ингредиентов','Фиксация брака']},
+  '4k':{bakery:'Кондитерский цех',shift:'08:00 – 17:00',
+    goals:[{t:'Десерты',x:'Выполнять план изготовления десертов в срок'},{t:'Эстетика',x:'Соблюдать стандарты украшения'},{t:'Свежесть',x:'Готовить с соблюдением сроков хранения'}],
+    duties:['Отметить начало смены','Подготовить ингредиенты','Приготовить кремы и начинки','Выпечь коржи и основы','Собрать десерты','Украсить изделия','Проверить качество','Указать количество десертов','Подготовить к хранению','Убрать рабочее место','Отправить отчёт'],
+    rights:['Просмотр собственных задач','Просмотр кондитерских рецептур','Просмотр заказов','Изменение статуса','Учёт готовой продукции','Фиксация брака']},
+  3:{bakery:'Торговый зал',shift:'08:00 – 17:00',
+    goals:[{t:'Продажи',x:'Выполнять план продаж смены на 100%'},{t:'Сервис',x:'Обслуживать каждого клиента вежливо'},{t:'Витрина',x:'Поддерживать витрину полной и привлекательной'}],
+    duties:['Отметить начало смены','Подготовить кассу','Проверить витрину','Проверить наличие продукции','Выложить выпечку','Обслуживать покупателей','Принимать заказы','Готовить напитки','Поддерживать чистоту','Закрыть кассовую смену','Отправить отчёт'],
+    rights:['Просмотр собственных задач','Просмотр ассортимента','Просмотр цен','Отметка выполнения заданий','Отправка заявок на пополнение витрины','Просмотр собственных смен']},
+  2:{bakery:'Производственный цех',shift:'06:30 – 15:30',
+    goals:[{t:'Помощь',x:'Качественно помогать пекарям и кондитерам'},{t:'Чистота',x:'Поддерживать порядок на рабочем месте'},{t:'Подготовка',x:'Своевременно готовить ингредиенты'}],
+    duties:['Отметить начало смены','Подготовить рабочее место','Подготовить ингредиенты','Взвесить продукты','Подготовить формы и противни','Помочь пекарям и кондитерам','Помыть инвентарь','Провести уборку','Отметить выполнение задач','Отправить отчёт'],
+    rights:['Просмотр собственных задач','Просмотр инструкций','Просмотр списка ингредиентов','Отметка выполнения','Сообщение о проблемах']},
+  1:{bakery:'Все помещения пекарни',shift:'06:00 – 15:00',
+    goals:[{t:'Чистота',x:'Поддерживать идеальную чистоту во всех помещениях'},{t:'Санитария',x:'Соблюдать все санитарные нормы'},{t:'Порядок',x:'Своевременно выполнять уборку по графику'}],
+    duties:['Отметить начало рабочего времени','Проверить чистоту помещений','Подготовить моющие средства','Проверить наличие инвентаря','Мыть полы в производственных помещениях','Очищать рабочие поверхности','Убирать торговый зал','Поддерживать чистоту санузлов','Выносить мусор','Провести заключительную уборку','Заполнить отчёт о уборке','Отметить окончание смены'],
+    rights:['Просмотр собственных задач','Просмотр графика уборки','Отметка выполнения','Сообщение о проблемах','Отправка отчёта управляющему']}
+};
+
+const TASKS = {
+  13:[{id:1,title:'Проверить общую статистику сети',status:'pending',assigner:'Система',deadline:'15.11.2026 12:00'},{id:2,title:'Посмотреть отчёты территориальных управляющих',status:'progress',assigner:'Система',deadline:'15.11.2026 17:00'},{id:3,title:'Утвердить бюджет на декабрь',status:'pending',assigner:'Система',deadline:'16.11.2026 18:00'}],
+  12:[{id:1,title:'Проверить работу закреплённых пекарен',status:'pending',assigner:'Соколов А.В.',deadline:'15.11.2026 13:00'},{id:2,title:'Проверить отчёты управляющих',status:'progress',assigner:'Система',deadline:'15.11.2026 18:00'},{id:3,title:'Подготовить отчёт директору',status:'pending',assigner:'Система',deadline:'15.11.2026 19:00'}],
+  11:[{id:1,title:'Проверить качество продукции',status:'pending',assigner:'Система',deadline:'15.11.2026 12:00'},{id:2,title:'Обновить рецептуру круассана',status:'progress',assigner:'Система',deadline:'16.11.2026 18:00'}],
+  10:[{id:1,title:'Проверить поступления и расходы',status:'pending',assigner:'Система',deadline:'15.11.2026 13:00'},{id:2,title:'Проверить кассовые отчёты',status:'progress',assigner:'Система',deadline:'15.11.2026 17:00'},{id:3,title:'Подготовить финансовую отчётность',status:'pending',assigner:'Соколов А.В.',deadline:'16.11.2026 18:00'}],
+  9:[{id:1,title:'Проверить заявки от пекарен',status:'pending',assigner:'Система',deadline:'15.11.2026 11:00'},{id:2,title:'Связаться с поставщиками муки',status:'progress',assigner:'Система',deadline:'15.11.2026 14:00'}],
+  8:[{id:1,title:'Проверить активность сотрудников',status:'pending',assigner:'Система',deadline:'15.11.2026 12:00'},{id:2,title:'Найти просроченные задачи',status:'progress',assigner:'Система',deadline:'15.11.2026 14:00'}],
+  7:[{id:1,title:'Проверить открытие пекарни',status:'done',assigner:'Система',deadline:'15.11.2026 08:00'},{id:2,title:'Проверить присутствие сотрудников',status:'done',assigner:'Система',deadline:'15.11.2026 08:30'},{id:3,title:'Проверить производственный план',status:'progress',assigner:'Морозова Е.С.',deadline:'15.11.2026 12:00'}],
+  6:[{id:1,title:'Распределить задачи между пекарями',status:'done',assigner:'Петров П.С.',deadline:'15.11.2026 08:00'},{id:2,title:'Установить план производства',status:'progress',assigner:'Петров П.С.',deadline:'15.11.2026 10:00'}],
+  5:[{id:1,title:'Проверить остатки',status:'done',assigner:'Система',deadline:'15.11.2026 08:00'},{id:2,title:'Принять поставки',status:'progress',assigner:'Кузнецов И.П.',deadline:'15.11.2026 12:00'}],
+  4:[{id:1,title:'Отметить начало смены',status:'done',assigner:'Система',deadline:'15.11.2026 07:15'},{id:2,title:'Подготовить тесто для багетов',status:'progress',assigner:'Фёдорова М.И.',deadline:'15.11.2026 09:00'},{id:3,title:'Выпечь 50 круассанов',status:'pending',assigner:'Фёдорова М.И.',deadline:'15.11.2026 12:00'}],
+  '4k':[{id:1,title:'Отметить начало смены',status:'done',assigner:'Система',deadline:'15.11.2026 08:15'},{id:2,title:'Приготовить крем для торта',status:'progress',assigner:'Фёдорова М.И.',deadline:'15.11.2026 10:30'}],
+  3:[{id:1,title:'Отметить начало смены',status:'done',assigner:'Система',deadline:'15.11.2026 08:15'},{id:2,title:'Подготовить кассу',status:'done',assigner:'Петров П.С.',deadline:'15.11.2026 08:45'},{id:3,title:'Выложить выпечку на витрину',status:'progress',assigner:'Петров П.С.',deadline:'15.11.2026 09:15'}],
+  2:[{id:1,title:'Отметить начало смены',status:'done',assigner:'Система',deadline:'15.11.2026 06:45'},{id:2,title:'Подготовить рабочее место',status:'done',assigner:'Фёдорова М.И.',deadline:'15.11.2026 07:15'},{id:3,title:'Взвесить продукты',status:'progress',assigner:'Фёдорова М.И.',deadline:'15.11.2026 08:00'}],
+  1:[{id:1,title:'Отметить начало смены',status:'done',assigner:'Система',deadline:'15.11.2026 06:15'},{id:2,title:'Проверить чистоту помещений',status:'done',assigner:'Петров П.С.',deadline:'15.11.2026 07:00'},{id:3,title:'Помыть полы',status:'progress',assigner:'Петров П.С.',deadline:'15.11.2026 08:30'}]
+};
+
+let user = null;
+let page = 'profile';
+
+const GROUPS = [
+  {title:'👑 Топ-менеджмент сети', levels:[13,12,11,10]},
+  {title:'💼 Административный персонал', levels:[9,8]},
+  {title:'🏪 Управление пекарней', levels:[7,6,5]},
+  {title:'👨‍🍳 Производственный персонал', levels:[4,'4k']},
+  {title:'💼 Торговый и вспомогательный персонал', levels:[3,2,1]}
+];
+
+function renderLogin(){
+  const list = document.getElementById('empList');
+  list.innerHTML = GROUPS.map(g=>{
+    const emps = EMP.filter(e=>g.levels.includes(e.level));
+    if(!emps.length) return '';
+    return `<div class="group">
+      <div class="group-title">${g.title}<span class="badge">${emps.length} сотр.</span></div>
+      <div class="grid">
+        ${emps.map(e=>{
+          const initials = e.name.split(' ').slice(0,2).map(s=>s[0]).join('');
+          return `<div class="card" onclick="login(${e.id})">
+            <div class="av">${initials}</div>
+            <div class="info">
+              <div class="nm">${e.name}</div>
+              <div class="rl">${e.role} • Level ${e.level}</div>
+              <span class="ps">🔑 ${e.pass}</span>
+            </div>
+            <button class="go">Войти →</button>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function login(id){
+  const emp = EMP.find(e=>e.id===id);
+  if(!emp){alert('Сотрудник не найден');return;}
+  user = emp;
+  sessionStorage.setItem('user',JSON.stringify(emp));
+  showApp();
+}
+
+function logout(){
+  user = null;
+  sessionStorage.removeItem('user');
+  document.getElementById('app').classList.remove('on');
+  document.getElementById('loginPage').style.display = 'block';
+}
+
+function showApp(){
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('app').classList.add('on');
+  renderUserCard();
+  renderNav();
+  page = 'profile';
+  renderPage();
+}
+
+function renderUserCard(){
+  const initials = user.name.split(' ').slice(0,2).map(s=>s[0]).join('');
+  document.getElementById('uAv').textContent = initials;
+  document.getElementById('uName').textContent = user.name;
+  document.getElementById('uRole').textContent = user.role;
+  document.getElementById('uLevel').textContent = 'Level ' + user.level;
+}
+
+function renderNav(){
+  const items = [
+    {id:'profile',icon:'👤',label:'Личный кабинет'},
+    {id:'tasks',icon:'✅',label:'Мои задачи'},
+    {id:'schedule',icon:'📅',label:'Мой график'},
+    {id:'reports',icon:'📄',label:'Мои отчёты'},
+    {id:'notifications',icon:'🔔',label:'Уведомления'},
+    {id:'performance',icon:'📊',label:'Мои показатели'},
+    {id:'instructions',icon:'📚',label:'Инструкции'}
+  ];
+  document.getElementById('navMenu').innerHTML = items.map(it=>
+    `<div class="nav-item ${page===it.id?'on':''}" onclick="go('${it.id}')">${it.icon} ${it.label}</div>`
+  ).join('');
+}
+
+function go(p){
+  page = p;
+  renderNav();
+  renderPage();
+  if(window.innerWidth<900) document.getElementById('sidebar').classList.remove('on');
+}
+
+function renderPage(){
+  const c = document.getElementById('pageContent');
+  if(page==='profile') c.innerHTML = renderProfile();
+  else if(page==='tasks') c.innerHTML = renderTasks();
+  else if(page==='schedule') c.innerHTML = renderSchedule();
+  else if(page==='reports') c.innerHTML = renderReports();
+  else if(page==='notifications') c.innerHTML = renderNotifications();
+  else if(page==='performance') c.innerHTML = renderPerformance();
+  else if(page==='instructions') c.innerHTML = renderInstructions();
+}
+
+function renderProfile(){
+  const d = DETAILS[user.level] || {bakery:'—',shift:'—',goals:[],duties:[],rights:[]};
+  const initials = user.name.split(' ').slice(0,2).map(s=>s[0]).join('');
+  const tasks = TASKS[user.level] || [];
+  const done = tasks.filter(t=>t.status==='done').length;
+  const prog = tasks.filter(t=>t.status==='progress').length;
+  const pend = tasks.filter(t=>t.status==='pending').length;
+  
+  return `
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-av">${initials}</div>
+        <div class="hero-info">
+          <div class="hero-name">${user.name}</div>
+          <div class="hero-pos">${user.role}</div>
+          <div class="hero-meta">
+            <span class="meta-item">🏢 ${d.bakery}</span>
+            <span class="meta-item">🕐 ${d.shift}</span>
+            <span class="meta-item">⭐ Level ${user.level}</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-label">Задач всего</div><div class="hstat-val">${tasks.length}</div></div>
+        <div class="hstat"><div class="hstat-label">Выполнено</div><div class="hstat-val" style="color:#A5D6A7">${done}</div></div>
+        <div class="hstat"><div class="hstat-label">В работе</div><div class="hstat-val" style="color:#90CAF9">${prog}</div></div>
+        <div class="hstat"><div class="hstat-label">Ожидает</div><div class="hstat-val" style="color:#FFCC80">${pend}</div></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="block">
+        <div class="block-head">
+          <div class="block-icon">🎯</div>
+          <div><div class="block-title">Мои цели</div><div class="block-sub">Ключевые цели на период</div></div>
+        </div>
+        ${d.goals.map(g=>`<div class="goal"><strong>${g.t}</strong>${g.x}</div>`).join('')}
+      </div>
+
+      <div class="block">
+        <div class="block-head">
+          <div class="block-icon">📋</div>
+          <div><div class="block-title">Ежедневные задачи</div><div class="block-sub">Что делать каждый день</div></div>
+        </div>
+        <ul class="duty-list">
+          ${d.duties.map((x,i)=>`<li class="duty-item"><span class="duty-num">${i+1}</span><span class="duty-text">${x}</span></li>`).join('')}
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <div class="block-icon">✅</div>
+        <div><div class="block-title">Текущие задачи на сегодня</div><div class="block-sub">Активные задачи в системе</div></div>
+      </div>
+      ${tasks.length===0?'<div style="text-align:center;padding:20px;color:var(--choc);opacity:.7">Задач нет</div>':`
+        <div class="task-list">
+          ${tasks.map(t=>`
+            <div class="task">
+              <div class="task-dot ${t.status}"></div>
+              <div class="task-body">
+                <div class="task-title">${t.title}</div>
+                <div class="task-meta">Назначил: ${t.assigner} • Срок: ${t.deadline}</div>
+              </div>
+              <span class="tag ${t.status}">${t.status==='done'?'✓ Выполнено':t.status==='progress'?'▶ В работе':t.status==='problem'?'⚠ Проблема':'◷ Ожидает'}</span>
+            </div>
+          `).join('')}
+        </div>
+      `}
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <div class="block-icon">🔐</div>
+        <div><div class="block-title">Мои права в системе</div><div class="block-sub">Согласно матрице доступа</div></div>
+      </div>
+      ${d.rights.map(r=>`<div class="right-item"><div class="right-icon">✓</div><div class="right-text">${r}</div></div>`).join('')}
+    </div>
+  `;
+}
+
+function renderTasks(){
+  const tasks = TASKS[user.level] || [];
+  return `
+    <h1 style="font-size:26px;font-weight:700;margin-bottom:8px">Мои задачи</h1>
+    <p style="color:var(--choc);margin-bottom:24px">Задачи на сегодня • ${new Date().toLocaleDateString('ru-RU')}</p>
+    <div class="block">
+      ${tasks.length===0?'<div style="text-align:center;padding:20px">Нет задач</div>':`
+        <div class="task-list">
+          ${tasks.map(t=>`
+            <div class="task">
+              <div class="task-dot ${t.status}"></div>
+              <div class="task-body">
+                <div class="task-title">${t.title}</div>
+                <div class="task-meta">Назначил: ${t.assigner} • Срок: ${t.deadline}</div>
+              </div>
+              <div class="task-actions">
+                ${t.status!=='done'?`<button class="btn-sm success" onclick="markDone(${t.id})">✓ Выполнено</button>`:''}
+                ${t.status!=='progress'&&t.status!=='done'?`<button class="btn-sm" onclick="markProg(${t.id})">▶ В работе</button>`:''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `}
+    </div>
+  `;
+}
+
+function markDone(id){
+  const t = (TASKS[user.level]||[]).find(x=>x.id===id);
+  if(t){t.status='done';renderPage();toast('Задача выполнена ✓');}
+}
+function markProg(id){
+  const t = (TASKS[user.level]||[]).find(x=>x.id===id);
+  if(t){t.status='progress';renderPage();toast('Статус обновлён');}
+}
+
+function renderSchedule(){
+  const d = DETAILS[user.level] || {shift:'07:00 – 16:00'};
+  const today = new Date().getDay();
+  const idx = today===0?6:today-1;
+  const days = [
+    {d:'Пн',h:d.shift,t:'work'},{d:'Вт',h:d.shift,t:'work'},{d:'Ср',h:'—',t:'off'},
+    {d:'Чт',h:d.shift,t:'work'},{d:'Пт',h:d.shift,t:'work'},{d:'Сб',h:'09:00–15:00',t:'work'},{d:'Вс',h:'—',t:'off'}
+  ];
+  return `
+    <h1 style="font-size:26px;font-weight:700;margin-bottom:24px">Мой график</h1>
+    <div class="block">
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px">
+        ${days.map((s,i)=>`
+          <div style="background:${i===idx?'linear-gradient(135deg,var(--caramel),var(--terra))':s.t==='work'?'#E8F0E3':'var(--cream)'};border-radius:10px;padding:12px 8px;text-align:center;color:${i===idx?'white':'inherit'}">
+            <div style="font-weight:700;margin-bottom:4px">${s.d}</div>
+            <div style="font-size:11px;opacity:.8">${s.h}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderReports(){
+  return `
+    <h1 style="font-size:26px;font-weight:700;margin-bottom:24px">Мои отчёты</h1>
+    <div class="block">
+      <div style="text-align:center;padding:40px;color:var(--choc);opacity:.7">
+        У вас пока нет отправленных отчётов
+      </div>
+    </div>
+  `;
+}
+
+function renderNotifications(){
+  return `
+    <h1 style="font-size:26px;font-weight:700;margin-bottom:24px">Уведомления</h1>
+    <div class="block">
+      <div style="padding:12px;background:var(--cream);border-radius:10px;border-left:3px solid var(--caramel);margin-bottom:8px">
+        <div style="font-size:13px">Добро пожаловать в систему Crust Issues Bakery!</div>
+        <div style="font-size:11px;color:var(--choc);opacity:.7;margin-top:4px">15.11.2026 08:00</div>
+      </div>
+      <div style="padding:12px;background:white;border-radius:10px;border-left:3px solid var(--terra);margin-bottom:8px">
+        <div style="font-size:13px">Новая задача назначена</div>
+        <div style="font-size:11px;color:var(--choc);opacity:.7;margin-top:4px">15.11.2026 08:30</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderPerformance(){
+  const tasks = TASKS[user.level] || [];
+  const done = tasks.filter(t=>t.status==='done').length;
+  const total = tasks.length;
+  const pct = total>0?Math.round(done/total*100):0;
+  return `
+    <h1 style="font-size:26px;font-weight:700;margin-bottom:24px">Мои показатели</h1>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px">
+      <div style="background:white;border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(62,39,35,.08)">
+        <div style="font-size:12px;color:var(--choc);text-transform:uppercase;font-weight:600">Задач выполнено</div>
+        <div style="font-size:26px;font-weight:700;margin-top:4px">${done} / ${total}</div>
+      </div>
+      <div style="background:white;border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(62,39,35,.08)">
+        <div style="font-size:12px;color:var(--choc);text-transform:uppercase;font-weight:600">Эффективность</div>
+        <div style="font-size:26px;font-weight:700;margin-top:4px">${pct}%</div>
+      </div>
+      <div style="background:white;border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(62,39,35,.08)">
+        <div style="font-size:12px;color:var(--choc);text-transform:uppercase;font-weight:600">Опозданий</div>
+        <div style="font-size:26px;font-weight:700;margin-top:4px">0</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderInstructions(){
+  const L = user.level;
+  const inst = {
+    13:['Стратегия развития сети','Порядок утверждения бюджетов','Регламент работы с управляющими','Политика качества'],
+    12:['Стандарт работы пекарни','Регламент проверки точек','Порядок взаимодействия','KPI для пекарен'],
+    11:['Технологические стандарты','Порядок разработки рецептур','СанПиН','Контроль качества'],
+    10:['Положение о бухучёте','Порядок инвентаризации','Налоговый регламент','Финансовая отчётность'],
+    9:['Регламент работы с поставщиками','Порядок согласования закупок','Стандарты приёмки','Договорные условия'],
+    8:['Правила трудового распорядка','Порядок контроля активности','Регламент работы с задачами','Политика уведомлений'],
+    7:['Стандарт открытия/закрытия','Регламент работы с персоналом','Порядок работы с кассой','Стандарт обслуживания'],
+    6:['Технологические карты','Порядок распределения задач','Стандарты качества','Регламент фиксации брака'],
+    5:['Правила хранения','Порядок приёмки','Регламент выдачи','СанПиН для складов'],
+    4:['Технологические карты хлеба','Порядок подготовки теста','Стандарты выпечки','Санитарные правила'],
+    '4k':['Технологические карты десертов','Порядок приготовления кремов','Стандарты украшения','Санитарные правила'],
+    3:['Стандарт обслуживания','Порядок работы с кассой','Правила выкладки','Скрипты продаж'],
+    2:['Инструкция по подготовке','Порядок помощи пекарям','Санитарные правила','Правила мытья'],
+    1:['График уборки','Инструкция по средствам','СанПиН','Правила утилизации']
+  };
+  const list = inst[L] || [];
+  return `
+    <h1 style="font-size:26px;font-weight:700;margin-bottom:24px">Рабочие инструкции</h1>
+    <div class="block">
+      <div class="task-list">
+        ${list.map(t=>`
+          <div class="task">
+            <div class="task-dot done"></div>
+            <div class="task-body"><div class="task-title">${t}</div><div class="task-meta">Обновлено: 01.11.2026</div></div>
+            <button class="btn-sm" onclick="toast('Открыт документ: ${t}')">Открыть</button>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function toast(msg){
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
+
+renderLogin();
+const saved = sessionStorage.getItem('user');
+if(saved){
+  user = JSON.parse(saved);
+  showApp();
+}
+</script>
+</body>
+</html>
